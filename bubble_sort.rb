@@ -32,7 +32,7 @@ def verify(id, array, expected)
     status = 'FAIL'
     extra = " , but found '#{result}'"
   end
-  puts "Test #{id}: #{status} buble_sort('#{array}') == '#{expected}'#{extra}"
+  puts "Test #{id}: #{status} bubble_sort('#{array}') == '#{expected}'#{extra}"
 end
 
 t = 0
