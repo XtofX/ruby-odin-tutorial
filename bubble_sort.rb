@@ -7,7 +7,7 @@
 # > bubble_sort([4,3,78,2,0,2])
 # => [0,2,2,3,4,78]
 
-def swap(idx1, idx2, result)
+def swap_index(idx1, idx2, result)
   tmp = result[idx2]
   result[idx2] = result[idx1]
   result[idx1] = tmp
@@ -20,7 +20,7 @@ def bubble_sort(array)
     (1..(result.length - i)).each do |j| # take into account the end is already sorted
       next if result[j] > result[j - 1]
 
-      swap(j - 1, j, result)
+      swap_index(j - 1, j, result)
       swap = true
     end
     break unless swap # OPTIMIZE: when nothing has been swapped => it is ordered
