@@ -10,13 +10,16 @@
 def bubble_sort(array)
   result = array.clone
   (1...(result.length)).each do |i|
+    swap = false
     (1..(result.length - i)).each do |j|
       next if result[j] > result[j - 1]
 
       tmp = result[j]
       result[j] = result[j - 1]
       result[j - 1] = tmp
+      swap = true
     end
+    break unless swap # optimize when nothing has been swapped => it is ordered
   end
   result
 end
@@ -37,6 +40,8 @@ verify(t += 1, [1, 0], [0, 1])
 verify(t += 1, [1, 0, 2], [0, 1, 2])
 verify(t += 1, [2, 1, 0, 2], [0, 1, 2, 2])
 verify(t += 1, [0, 6, 3, 2, 1, 0, 2], [0, 0, 1, 2, 2, 3, 6])
+verify(t += 1, [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6])
+verify(t += 1, [1, 2, 6, 3, 4, 5], [1, 2, 3, 4, 5, 6])
 verify(t += 1, [4, 3, 78, 2, 0, 2], [0, 2, 2, 3, 4, 78])
 
 verify(t + 1, [0], [0])
