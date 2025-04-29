@@ -15,30 +15,39 @@
 #
 
 def stock_picker(prices)
-  buy = prices[0]
-  buy_index = 0
-  max = 0
-  max_index = [0, 0]
+  current_low = prices[0]
+  current_low_index = 0
 
-  prices.each_with_index do |p, i|
-    if p <= buy
-      buy = p
-      buy_index = i
+  max_profit = 0
+  best_profit = [0, 0]
+
+  prices.each_with_index do |value, idx|
+    if value <= current_low
+      # found a new low! reset for potential future gain
+      current_low = value
+      current_low_index = idx
       next
     end
 
-    profit = p - buy
-    if profit > max
-      max = profit
-      max_index = [buy_index, i]
+    profit = value - current_low
+    if profit > max_profit
+      max_profit = profit
+      best_profit = [current_low_index, idx]
     end
   end
 
-  p max_index
+  best_profit
 end
 
 def verify(id, prices, expected)
-  puts "Test #{id}: #{stock_picker(prices) == expected ? 'PASS' : 'FAIL'} stock_picker('#{prices}') == '#{expected}'"
+  result = stock_picker(prices)
+  status = 'PASS'
+  extra = ''
+  if result != expected
+    status = 'FAIL'
+    extra = " , but found '#{result}'"
+  end
+  puts "Test #{id}: #{status} stock_picker('#{prices}') == '#{expected}'#{extra}"
 end
 
 t = 0
