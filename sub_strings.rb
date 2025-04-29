@@ -22,7 +22,7 @@ def sub_strings(str, dictionary)
 end
 
 def test(id, str, dictionary, expected)
-  puts "Test #{id}: #{sub_strings(str, dictionary) == expected ? "PASS" : "FAIL"} cipher('#{str}', #{dictionary}) == '#{expected}'"  
+  puts "Test #{id}: #{sub_strings(str, dictionary) == expected ? "PASS" : "FAIL"} sub_strings('#{str}', #{dictionary}) == '#{expected}'"  
 end
 
 t = 0
@@ -30,8 +30,7 @@ test(t += 1, "xtof", ["abc", "def"], {});
 test(t += 1, "xtof", ["abc", "def", "xtof"], {"xtof" => 1});
 test(t += 1, "xtof xtof", ["abc", "def", "xtof"], {"xtof" => 2});
 test(t += 1, "xtOf Xtof", ["abc", "def", "xtof"], {"xtof" => 2});
-test(t += 1, "below", 
-  ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"], {"below" => 1, "low" => 1});
+test(t += 1, "below", ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"], {"below" => 1, "low" => 1});
 test(t += 1, "Howdy partner, sit down! How's it going?", 
   ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"],
   {"howdy" => 1, "how" => 2, "down" => 1, "going" => 1, "partner" => 1, "it" => 2, "i" => 3, "part" => 1, "go" => 1, "sit" => 1, own => 1});
