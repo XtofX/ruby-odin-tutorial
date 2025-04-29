@@ -17,7 +17,7 @@ def bubble_sort(array)
   result = array.clone
   (1...(result.length)).each do |i|
     swap = false
-    (1..(result.length - i)).each do |j|
+    (1..(result.length - i)).each do |j| # take into account the end is already sorted
       next if result[j] > result[j - 1]
 
       swap(j - 1, j, result)
