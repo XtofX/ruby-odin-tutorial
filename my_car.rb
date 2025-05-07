@@ -60,7 +60,7 @@ class MyCarTest
   def verify_color(car, expected)
     result = car.color == expected
     update_counters(result)
-    puts "Test #{id}: #{car.color == expected ? 'PASS' : 'FAIL'} #{car} is #{expected}"
+    puts "Test #{id}: #{result ? 'PASS' : 'FAIL'} #{car} is #{expected}"
   end
 
   def to_s
