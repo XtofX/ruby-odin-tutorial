@@ -108,19 +108,19 @@ class MyCarTest
   end
 end
 
-f150 = MyCar.new("F150", "2025", "yellow")
+f150 = MyCar.new('F150', '2025', 'yellow')
 test = MyCarTest.new
 
-test.verify_speed(f150, "shut_off", nil, 0)
-test.verify_speed(f150, "speed_up", 10, 10)
-test.verify_speed(f150, "speed_up", 10, 20)
-test.verify_speed(f150, "speed_up", 100, 120)
-test.verify_speed(f150, "brake", 50, 70)
-test.verify_color(f150, "yellow")
-f150.color = "blue"
-test.verify_color(f150, "blue")
-f150.spray_paint("red")
-test.verify_color(f150, "red")
+test.verify_speed(f150, 'shut_off', nil, 0)
+test.verify_speed(f150, 'speed_up', 10, 10)
+test.verify_speed(f150, 'speed_up', 10, 20)
+test.verify_speed(f150, 'speed_up', 100, 120)
+test.verify_speed(f150, 'brake', 50, 70)
+test.verify_color(f150, 'yellow')
+f150.color = 'blue'
+test.verify_color(f150, 'blue')
+f150.spray_paint('red')
+test.verify_color(f150, 'red')
 
 test.verify_gas_mileage(8, 100, 100.0 / 8.0)
 puts test # print summary
