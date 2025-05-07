@@ -16,15 +16,12 @@
 # Don’t forget to keep the same case.
 # The Wikipedia quote discusses a Caesar cipher using a left shift.
 
-def encrypt_char(c, delta, base)
-  (base.ord + (c[0].ord - base.ord + delta) % 26).chr
-end
-
 def cipher(str, delta)
   # establish the appropriate translation for any alphabetical characters
-  ref = {}
-  ('a'..'z').each_with_object(ref) { |c, h| h[c] = encrypt_char(c, delta, 'a') }
-  ('A'..'Z').each_with_object(ref) { |c, h| h[c] = encrypt_char(c, delta, 'A') }
+  ref = ('a'..'z').each_with_object({}) do |c, h|
+    h[c] = ('a'.ord + (c[0].ord - 'a'.ord + delta) % 26).chr
+    h[c.upcase] = h[c].upcase
+  end
 
   # encrypt the string
   str.chars.map { |c| ref.fetch(c, c) }.join
