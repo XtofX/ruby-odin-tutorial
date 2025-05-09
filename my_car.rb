@@ -17,7 +17,23 @@
 # 1. Add a class method to your MyCar class that calculates the gas mileage (i.e. miles per gallon) of any car.
 
 # 2. Override the to_s method to create a user friendly print out of your object.
-class MyCar
+
+# From https://launchschool.com/books/oo_ruby/read/inheritance#exercises
+# 1. Create a superclass called Vehicle for your MyCar class to inherit from and move the behavior that isn't
+# specific to the MyCar class to the superclass. Create a constant in your MyCar class that stores information
+# about the vehicle that makes it different from other types of Vehicles.
+#
+# Then create a new class called MyTruck that inherits from your superclass that also has a constant defined that
+# separates it from the MyCar class in some way.
+
+# 2. Add a class variable to your superclass that can keep track of the number of objects created that inherit from
+# the superclass. Create a method to print out the value of this class variable as well.
+class Vehicle
+  @@vehicle_count = 0
+
+  def self.vehicle_count
+    @@vehicle_count ||= 0
+  end
 
   def self.gas_mileage(gallons, miles)
     gm = miles.to_f / gallons
@@ -33,6 +49,7 @@ class MyCar
     @model = model
     @year = year
     @color = color
+    @@vehicle_count += 1
   end
 
   def current_speed
@@ -58,10 +75,33 @@ class MyCar
     @color = color
     puts "Your new #{color} paint job looks great!"
   end
+end
+
+# For Truck
+module Towable
+  def can_tow?(pound)
+    pound < 2000
+  end
+end
+
+class MyCar < Vehicle
+  NUMBER_OF_WHEELS = 4
 
   def to_s
-    "#{@model}/#{@year}/#{@color}"
+    "My car is #{@model}/#{@year}/#{@color}"
   end
+
+end
+
+class MyTruck < Vehicle
+  NUMBER_OF_WHEELS = 18
+
+  include Towable
+
+  def to_s
+    "My Truck is #{@model}/#{@year}/#{@color}"
+  end
+
 end
 
 # MyCarTest is a class designed to performed test over MyCar
@@ -84,6 +124,12 @@ class MyCarTest
     result = car.color == expected
     update_counters(result)
     puts "Test #{id}: #{result ? 'PASS' : 'FAIL'} #{car} is #{expected}"
+  end
+
+  def verify_instance_counter(expected)
+    result = Vehicle.vehicle_count == expected
+    update_counters(result)
+    puts "Test #{id}: #{result ? 'PASS' : 'FAIL'} instance count is #{expected}"
   end
 
   def to_s
@@ -111,6 +157,7 @@ end
 f150 = MyCar.new('F150', '2025', 'yellow')
 test = MyCarTest.new
 
+test.verify_instance_counter(1)
 test.verify_speed(f150, 'shut_off', nil, 0)
 test.verify_speed(f150, 'speed_up', 10, 10)
 test.verify_speed(f150, 'speed_up', 10, 20)
